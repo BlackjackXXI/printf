@@ -6,6 +6,7 @@
  *
  * Return: Length of string printed - 1
  */
+ 
 int _putbit(unsigned int num)
 {
 	int len = 0;
