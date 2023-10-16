@@ -7,21 +7,20 @@
 
 #define _INT_MIN (1 << (sizeof(int) * 8 - 1))
 
-int _putpointer(void *arg);
-int _printf(const char *format, ...);
-int _putchar(char c);
+int _printf(const char *form, ...);
+int _putcharacter(char c);
 int _putstr(char *str);
-int _putint(int num);
-int _putuint(unsigned int num);
-int _putbit(unsigned int num);
-int _putoct(unsigned int num);
-int _puthex(unsigned int num, char alpha);
-int _putnospec(char *str);
-int _puthex2(int num);
-int _putsign(int num, char base);
-int _putspace(int num, char base);
+int _putinteger(int numb);
+int _putunsingedinteger(unsigned int numb);
+int _putbit(unsigned int numb);
+int _putoctal(unsigned int numb);
+int _puthexadecimal(unsigned int numb, char alpha);
+int _putnospecifier(char *str);
+int _puthexadecimal2(int numb);
+int _putsigned(int numb, char base);
+int _putspaced(int numb, char base);
 int _puthash(unsigned int num, char base);
-int _spec_handler (va_list ls_args, char spec);
-int _flag_handler(va_list ls_args, char spec, char base);
+int _specifier_handler(va_list ls_args, char specifier);
+int _flags_handler(va_list args_list, char specifier, char base);
 
 #endif
