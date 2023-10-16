@@ -29,7 +29,7 @@ int _putsigned(int numb, char specifier)
  * @specifier: the specifier
  * Return: len
  */
-int _putspace(int numb, char specifier)
+int _putspaced(int numb, char specifier)
 {
 	int len = 0;
 
