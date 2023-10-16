@@ -1,75 +1,74 @@
 #include "main.h"
 
 /**
- * _putsign - prints a sign
- *
- * @num: num signs
- * @spec: the specifier
+ * _putsigned - prints a signed 
+ * @numb: number of signs
+ * @specifier: specifier
  * Return: length
  */
-int _putsign(int num, char spec)
+int _putsigned(int numb, char specifier)
 {
 	int len = 0;
 
-	if (spec == 'd' || spec == 'i')
+	if (specifier == 'd' || specifier == 'i')
 	{
-		if (num >= 0)
-			len += _putchar('+');
-		len += _putint(num);
+		if (numb >= 0)
+			len += _putcharacter('+');
+		len += _putinteger(numb);
 	}
-	else if (spec == 'u')
-		len += _putuint(num);
+	else if (specifier == 'u')
+		len += _putuinteger(numb);
 
 	return (len);
 }
 
 /**
- * _putspace - prints a space
+ * _putspaced - prints a space
  *
- * @num: number of spaces
- * @spec: the specifier
+ * @numb: number of spaces
+ * @specifier: the specifier
  * Return: len
  */
-int _putspace(int num, char spec)
+int _putspace(int numb, char specifier)
 {
 	int len = 0;
 
-	if (spec == 'd' || spec == 'i')
+	if (specifier == 'd' || specifier == 'i')
 	{
-		if (num >= 0)
-			len += _putchar(' ');
-		len += _putint(num);
+		if (numb >= 0)
+			len += _putcharacter(' ');
+		len += _putinteger(numb);
 	}
-	else if (spec == 'u')
-		len += _putuint(num);
+	else if (specifier == 'u')
+		len += _putuinteger(numb);
 
 	return (len);
 }
 
 /**
  * _puthash - prints a hash
- * @num: number
+ * @numb: number
  * @base: base of number
  * Return: len
  */
-int _puthash(unsigned int num, char base)
+int _puthash(unsigned int numb, char base)
 {
 	int len = 0;
 
 	if (base == 'o')
 	{
-		len += _putchar('0');
-		len += _putoct(num);
+		len += _putcharacter('0');
+		len += _putoctal(numb);
 	}
 	else if (base == 'x')
 	{
 		len += _putstr("0x");
-		len += _puthex(num, 'x');
+		len += _puthexadecimal(numb, 'x');
 	}
 	else if (base == 'X')
 	{
 		len += _putstr("0X");
-		len += _puthex(num, 'X');
+		len += _puthexadecimal(numb, 'X');
 	}
 
 	return (len);
