@@ -1,103 +1,98 @@
-#include "main.h"
+#include "mainf.h"
 #include <stdio.h>
 /**
- * _printf - Prints to the standar output like regular printf
- * @format: The string to be printed adn its format specifiers
+ * _printf - Prints  standar output like regular printf
+ * @form:  printed adn its format specifiers string
  *
- * Return: Length of printed string
+ * Return: The Length of printed string
  */
-int _printf(const char *format, ...)
+int _printf(const char *form, ...)
 {
-	va_list ls_args;
+	va_list args_list;
 	char flag;
 	int i = 0, len = 0;
 
-	va_start(ls_args, format);
-	if (!format)
+	va_start(args_list, form);
+	if (!form)
 		return (-1);
-	while (format[i])
+	while (form[i])
 	{
-		if (format[i] != '%')
-			len += _putchar(format[i]);
+		if (form[i] != '%')
+			len += _putcharacter(form[i]);
 		else
 		{
 			i++;
-			if (!format[i])
+			if (!form[i])
 				return (-1);
-			if (format[i] == '+' || format[i] == ' ' || format[i] == '#')
+			if (form[i] == '+' || form[i] == ' ' || form[i] == '#')
 			{
-				flag = format[i];
+				flag = form[i];
 				i++;
-				len += _flag_handler(ls_args, flag, format[i]);
+				len += _flags_handler(args_list, flag, form[i]);
 			}
 			else
-				len += _spec_handler(ls_args, format[i]);
+				len += _specifier_handler(args_list, form[i]);
 		}
 		i++;
 	}
 
-	va_end(ls_args);
+	va_end(args_list);
 
 	return (len);
 }
 
 /**
- * _spec_handler - handles the specifier passed to _printf
+ * _specifier_handler - Does the handling for specifier passed to _printf
  *
- * @ls_args: List of variadic arguments
- * @spec: the specifier after %
- *
- * Return: length of handle argument
+ * @args_list: List of var arguments
+ * @specifier: specifier after %
+ * Return: length of handle arg
  */
-int _spec_handler (va_list ls_args, char spec)
+int _specifier_handler (va_list args_list, char specifier)
 {
 	int len = 0;
 
-	if (spec == 'c')
-		len += _putchar(va_arg(ls_args, int));
-	else if (spec == 's')
-		len += _putstr(va_arg(ls_args, char *));
-	else if (spec == 'd' || spec == 'i')
-		len += _putint(va_arg(ls_args, int));
-	else if (spec == 'b')
-		len += _putbit(va_arg(ls_args, unsigned int));
-	else if (spec == '%')
-		len += _putchar('%');
-	else if (spec == 'u')
-		len += _putuint(va_arg(ls_args, unsigned int));
-	else if (spec == 'o')
-		len += _putoct(va_arg(ls_args, unsigned int));
-	else if (spec == 'x' || spec == 'X')
-		len += _puthex(va_arg(ls_args, int), spec);
-	else if (spec == 'S')
-		len += _putnospec(va_arg(ls_args, char *));
-	/*else if (spec == 'p')*/
-	/*	len += _putpointer(va_arg(ls_args, void *));*/
+	if (specifier == 'c')
+		len += _putcharacter(va_arg(args_list, int));
+	else if (specifier == 's')
+		len += _putstr(va_arg(args_list, char *));
+	else if (specifier == 'd' || specifier == 'i')
+		len += _putinteger(va_arg(args_list, int));
+	else if (specifier == 'b')
+		len += _putbit(va_arg(args_list, unsigned int));
+	else if (specifier == '%')
+		len += _putcharacter('%');
+	else if (specifier == 'u')
+		len += _putunsingedinteger(va_arg(args_list, unsigned int));
+	else if (specifier == 'o')
+		len += _putoctal(va_arg(args_list, unsigned int));
+	else if (specifier == 'x' || specifier == 'X')
+		len += _puthexadecimal(va_arg(args_list, int), specifier);
+	else if (specifier == 'S')
+		len += _putnospecifier(va_arg(args_list, char *));
 	else
-		len += _printf("%%%c", spec);
-
+		len += _printf("%%%c", specifier);
 	return (len);
 }
 
 /**
- * _flag_handler - handles the specifier passed to _printf
+ * _flags_handler - handles a specifierifier to _printf
  *
- * @ls_args: List of variadic arguments
- * @spec: the specifier
- * @base: base
- * Return: length of handle argument
+ * @args_list: List of var arguments
+ * @specifier: specifierifier
+ * @base: base var
+ * Return: length of handle arguments
  */
-int _flag_handler(va_list ls_args, char spec, char base)
+int _flags_handler(va_list args_list, char specifier, char base)
 {
 	int len = 0;
 
-	if (spec == '+')
-		len += _putsign(va_arg(ls_args, int), base);
-	else if (spec == ' ')
+	if (specifier == '+')
+		len += _putsigned(va_arg(args_list, int), base);
+	else if (specifier == ' ')
 
-		len += _putspace(va_arg(ls_args, int), base);
-	else if (spec == '#')
-		len += _puthash(va_arg(ls_args, unsigned int), base);
-
+		len += _putspaced(va_arg(args_list, int), base);
+	else if (specifier == '#')
+		len += _puthash(va_arg(args_list, unsigned int), base);
 	return (len);
 }
