@@ -2,79 +2,79 @@
 
 /**
  * _putbit - Prints an binary value to standard output
- * @num: The unsigned number to be printed
+ * @numb: unsigned number for print
  *
  * Return: Length of string printed - 1
  */
  
-int _putbit(unsigned int num)
+int _putbit(unsigned int numb)
 {
 	int len = 0;
 	unsigned int val;
 
-	if (!num)
+	if (!numb)
 	{
-		len += _putchar('0');
+		len += _putcharacter('0');
 		return (len);
 	}
-	val = num % 2;
-	num = num / 2;
-	if (num)
-		len += _putbit(num);
-	len += _putchar(val + '0');
+	val = numb % 2;
+	numb = numb / 2;
+	if (numb)
+		len += _putbit(numb);
+	len += _putcharacter(val + '0');
 
 	return (len);
 }
 
 /**
- * _putoct - Prints an octal to standard output
- * @num: The number to be printed
+ * _putoctal - Prints octal stdr output
+ * @numb: The number to print
  *
  * Return: Length of string printed - 1
  */
-int _putoct(unsigned int num)
+int _putoctal(unsigned int numb)
 {
 	int len = 0;
 	unsigned int val;
 
-	if (num < 8)
+	if (numb < 8)
 	{
-		len += _putint(num);
+		len += _putinteger(numb);
 		return (len);
 	}
-	val = num % 8;
-	num = num / 8;
-	if (num)
-		len += _putoct(num);
-	len += _putchar(val + '0');
+	val = numb % 8;
+	numb = numb / 8;
+	if (numb)
+		len += _putoctal(numb);
+	len += _putcharacter(val + '0');
 
 	return (len);
 }
 
 /**
- * _puthex - Prints an hex to standard output
- * @num: The number to be printed
- * @alpha: alpha value
+ * _puthexadecimal - Prints a hex stdr output
+ * @numb: The number print
+ * @alpha: alpha
  * Return: Length of string printed - 1
  */
-int _puthex(unsigned int num, char alpha)
+int _puthexadecimal(unsigned int numb, char alpha)
 {
 	int len = 0;
 	unsigned int val;
 
-	if (num < 10)
-		return (_putchar(num + '0'));
-	if (num < 16)
+	if (numb < 10)
+		return (_putcharacter(numb + '0'));
+	if (numb < 16)
 	{
 		if (alpha == 'x')
-			return (_putchar(num + 87));
-		return (_putchar(num + 55));
+			return (_putcharacter(numb + 87));
+		return (_putcharacter(numb + 55));
 	}
-	val = num % 16;
-	num = num / 16;
-	if (num)
-		len += _puthex(num, alpha);
-	len += _puthex(val, alpha);
+	val = numb % 16;
+	numb = numb / 16;
+	if (numb)
+		len += _puthexadecimal(numb, alpha);
+	len += _puthexdecimal(val, alpha);
 
 	return (len);
 }
